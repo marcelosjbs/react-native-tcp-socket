@@ -66,6 +66,12 @@ class TcpSocketClient extends TcpSocket {
         socket.bind(new InetSocketAddress(localInetAddress, localPort));
         socket.connect(new InetSocketAddress(remoteInetAddress, port));
         if (socket instanceof SSLSocket) ((SSLSocket) socket).startHandshake();
+
+        if (options.hashKey("receiveBufferSize")) {
+            int receiveBufferSize = options.getInteger("receiveBufferSize");
+            socket.setReceiveBufferSize( receiveBufferSize );
+        }
+
         startListening();
     }
 
