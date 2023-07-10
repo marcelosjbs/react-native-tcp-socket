@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TcpSocketModule extends ReactContextBaseJavaModule {
     public static final String TAG = "TcpSockets";
-    private static final int N_THREADS = 2;
+    private static final int N_THREADS = 32;
     private final ReactApplicationContext mReactContext;
     private final ConcurrentHashMap<Integer, TcpSocket> socketMap = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<Integer, ReadableMap> pendingTLS = new ConcurrentHashMap<>();

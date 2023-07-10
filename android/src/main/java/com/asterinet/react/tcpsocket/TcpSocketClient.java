@@ -64,7 +64,14 @@ class TcpSocketClient extends TcpSocket {
         final int localPort = options.hasKey("localPort") ? options.getInt("localPort") : 0;
         // bind
         socket.bind(new InetSocketAddress(localInetAddress, localPort));
-        socket.connect(new InetSocketAddress(remoteInetAddress, port));
+
+        if (options.hashKey("timeout")) {
+            int timeout = options.getInteger("timeout");
+            socket.connect(new InetSocketAddress(remoteInetAddress, port), timeout);
+        } else {
+            socket.connect(new InetSocketAddress(remoteInetAddress, port));
+        }
+
         if (socket instanceof SSLSocket) ((SSLSocket) socket).startHandshake();
 
         if (options.hashKey("receiveBufferSize")) {
