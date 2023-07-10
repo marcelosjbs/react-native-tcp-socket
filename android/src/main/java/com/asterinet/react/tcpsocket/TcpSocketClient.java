@@ -66,7 +66,7 @@ class TcpSocketClient extends TcpSocket {
         socket.bind(new InetSocketAddress(localInetAddress, localPort));
 
         if (options.hashKey("timeout")) {
-            int timeout = options.getInteger("timeout");
+            int timeout = options.getInt("timeout");
             socket.connect(new InetSocketAddress(remoteInetAddress, port), timeout);
         } else {
             socket.connect(new InetSocketAddress(remoteInetAddress, port));
@@ -75,7 +75,7 @@ class TcpSocketClient extends TcpSocket {
         if (socket instanceof SSLSocket) ((SSLSocket) socket).startHandshake();
 
         if (options.hashKey("receiveBufferSize")) {
-            int receiveBufferSize = options.getInteger("receiveBufferSize");
+            int receiveBufferSize = options.getInt("receiveBufferSize");
             socket.setReceiveBufferSize( receiveBufferSize );
         }
 
